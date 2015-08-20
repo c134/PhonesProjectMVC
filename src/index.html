@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>PhonesMVC</title>
+    <link href="../css/bootstrap.css" rel="stylesheet">
+</head>
+<body>
+<header class="text-center">
+    <h1>List of PhonesMVC</h1>
+</header>
+<div id="mainDiv" class="container-fluid">
+
+    <div id="phonesDiv" class="col-md-8"></div>
+
+    <div id="ordersCartDiv" class="col-md-4"></div>
+
+</div>
+<!--Templates-->
+<script type="text/template" id="listTemplate">
+
+        <ul id = "list">
+            <% for (var i=0; i< items.length; i++) { %>
+            <li><%=items[i].age %><br>
+            <%=items[i].name%><br>
+            <%=items[i].id%><br>
+            <img src="<%=items[i].imageUrl%>"/><br>
+            <%=items[i].snippet%><br>
+           <p>Price: <%=items[i].price%></p>
+                <button id="<%=items[i].id%>" class="buyButton btn btn-success" type="submit">Buy</button>
+            </li>
+            <% } %>
+
+    </ul>
+</script>
+<script type="text/template" id="cartTemplate">
+    <ul id = "cartList" >
+        <h2 class="text-center">orders</h2>
+        <% for(var i = 0; i < data.items.length; i++){%>
+        <%if(data.items[i].quantity !== 0){%>
+        <li><%=data.items[i].item.id%><br>
+            <%=data.items[i].item.name%><br>
+            <%if(data.items[i].quantity !== 1){%>
+            Quantity:<%=data.items[i].quantity%><br>
+            <%}%>
+            Price per Phone:<%=data.items[i].item.price%><br>
+            <%=data.items[i].thisItemTotal %><br>
+            <button id="<%=data.items[i].item.id%>" class="removeButton btn btn-default" type="button" aria-label="center-align">
+                Remove
+            </button>
+        </li>
+        <%}%>
+        <%}%>
+        <p>
+            <%if(data.TotalQuantity !== 0 && data.total !== 0){%>
+        Total Quantity:<%=data.TotalQuantity%><br>
+        Total Price:<%=data.total%><br>
+            <%}%>
+        </p>
+    </ul>
+</script>
+<script src = "js/phonesJS.js"></script>
+<script src="../external_libraries/jquery-1.11.3.js"></script>
+<script src="../external_libraries/underscore.js"></script>
+<script src="../external_libraries/bootstrap.min.js"></script>
+<script src="js/Module1/Controllers/itemList.js"></script>
+<script src="js/Module1/Models/cartCollection.js"></script>
+<script src="js/Module1/Controllers/cartList.js"></script>
+<script src="js/ScrollDiv.js"></script>
+
+
+<div id="footer" class="">
+    <div class="container">
+        <p  class="text-muted">Phone List &copy; 2015. All rights reserved.</p>
+    </div>
+</div>
+</body>
+</html>
